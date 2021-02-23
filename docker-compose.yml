@@ -1,0 +1,17 @@
+version: "2"
+services:
+    php:
+        build:
+          context: .
+          dockerfile: ./docker/Dockerfile
+        volumes:
+          - ".:/app"
+          - "./docker/php.ini:/usr/local/etc/php/conf.d/custom.ini"
+        depends_on:
+          - rabbitmq
+
+    rabbitmq:
+      image: rabbitmq:3.8-management-alpine
+      ports:
+        - "15672:15672"
+        - "5672:5672"
