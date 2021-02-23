@@ -1,5 +1,5 @@
 {
-  "name": "set-an-example/domain-event-symfony-messenger",
+  "name": "stegeman/domain-event-symfony-messenger",
   "type": "library",
   "description": "Basic implementation for domain event support for symfony messenger",
   "license": "MIT",
