@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LeeroyJenkins\Message;
+namespace Stegeman\SymfonyMessengerDomainEvents\Message;
 
 interface CommandHandlerInterface
 {

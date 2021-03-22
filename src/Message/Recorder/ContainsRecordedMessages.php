@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace ALWT\Message\Recorder;
+namespace Stegeman\SymfonyMessengerDomainEvents\Message\Recorder;
 
 interface ContainsRecordedMessages
 {

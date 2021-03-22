@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace LeeroyJenkins\Message\Recorder;
+namespace Stegeman\SymfonyMessengerDomainEvents\Message\Recorder;
 
 /**
  * Use this trait in classes which implement ContainsRecordedMessages to privately record and later release Message

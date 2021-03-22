@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tests\ALWT\Message\Dispatcher;
+namespace Stegeman\Tests\SymfonyMessengerDomainEvents\Message\Dispatcher;
 
-use ALWT\Message\Recorder\ContainsRecordedMessages;
-use ALWT\Message\Dispatcher\DomainEventDispatcher;
+use stdClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Stegeman\SymfonyMessengerDomainEvents\Message\Dispatcher\DomainEventDispatcher;
+use Stegeman\SymfonyMessengerDomainEvents\Message\Recorder\ContainsRecordedMessages;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -23,7 +24,7 @@ class DomainEventDispatcherTest extends TestCase
         $dispatcher->dispatchEventsForEntity(
             $this->createEntityContainingOneRecordedMessage(
                 [
-                    new \stdClass()
+                    new stdClass()
                 ]
             )
         );
@@ -31,17 +32,22 @@ class DomainEventDispatcherTest extends TestCase
         $this->assertCount(1, $messageBus->messages);
     }
 
+    /** @test */
+    public function entityThatIsNotInstanceOfContainsRecordedMessagesIsIgnored(): void
+    {
+        $messageBus = $this->createDummyMessageBus();
+        $dispatcher = $this->getDomainEventDispatcher($messageBus);
+
+        $dispatcher->dispatchEventsForEntity(
+            $this->createNonEventEntity()
+        );
+
+        $this->assertCount(0, $messageBus->messages);
+    }
+
     private function getDomainEventDispatcher(MessageBusInterface $messageBus): DomainEventDispatcher
     {
         return new DomainEventDispatcher($messageBus);
-    }
-
-    private function createMessageBus(): MessageBusInterface
-    {
-        $messageBus = $this->getMockBuilder(MessageBusInterface::class)->getMock();
-
-        /** @var MessageBusInterface $messageBus */
-        return $messageBus;
     }
 
     private function createContainsRecorderdMessages(): ContainsRecordedMessages
@@ -78,5 +84,10 @@ class DomainEventDispatcherTest extends TestCase
 
         /** @var ContainsRecordedMessages $entity */
         return $entity;
+    }
+
+    private function createNonEventEntity(): stdClass
+    {
+        return new stdClass();
     }
 }

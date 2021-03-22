@@ -1,5 +1,5 @@
 {
-  "name": "stegeman/domain-event-symfony-messenger",
+  "name": "stegeman/symfony-messenger-domain-events",
   "type": "library",
   "description": "Basic implementation for domain event support for symfony messenger",
   "license": "MIT",
@@ -18,7 +18,12 @@
   },
   "autoload": {
     "psr-4": {
-      "ALWT\\": "src/"
+      "Stegeman\\SymfonyMessengerDomainEvents\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Stegeman\\Tests\\SymfonyMessengerDomainEvents\\": "tests/"
     }
   },
   "minimum-stability": "stable"
